@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MusicPlayer.MainPage">
+             
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Label FontFamily="MonseratBold" Text="Главная" FontSize="Title" TextColor="Black"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+
+    <ScrollView>
+        <StackLayout BackgroundColor="white">
+            <Frame Margin="10" BorderColor="Black"
+               Padding="5">
+                <Grid>
+                    <Label Text="Урок 1: Am и Dm" FontFamily="MonseratMed" FontSize="30" HorizontalOptions="Start" VerticalOptions="Center" Padding="10,0,0,0" WidthRequest="400" HeightRequest="40" TextColor="Black"/>
+                    <Button HorizontalOptions="End" WidthRequest="2000" HeightRequest="50" TextColor="Black" BackgroundColor="#0000" FontFamily="Monserat" Clicked="Lesson1_clk"/> 
+                </Grid>
+            </Frame>
+            <Frame Margin="10" BorderColor="Black"
+               Padding="5">
+                <Grid>
+                    <Label Text="Потом буит.хых" FontFamily="MonseratMed" FontSize="30" HorizontalOptions="Start" VerticalOptions="Center" Padding="10,0,0,0" WidthRequest="400" HeightRequest="40" TextColor="Black"/>
+                    <Button HorizontalOptions="End" WidthRequest="2000" HeightRequest="50" TextColor="Black" BackgroundColor="#0000" FontFamily="Monserat" Clicked="Lesson1_clk"/>
+                </Grid>
+            </Frame>
+            <Frame Margin="10" BorderColor="Black"
+               Padding="5">
+                <Grid>
+                    <Label Text="Потом буит.хых" FontFamily="MonseratMed" FontSize="30" HorizontalOptions="Start" VerticalOptions="Center" Padding="10,0,0,0" WidthRequest="400" HeightRequest="40" TextColor="Black"/>
+                    <Button HorizontalOptions="End" WidthRequest="2000" HeightRequest="50" TextColor="Black" BackgroundColor="#0000" FontFamily="Monserat" Clicked="Lesson1_clk"/>
+                </Grid>
+            </Frame>
+            <Frame Margin="10" BorderColor="Black"
+               Padding="5">
+                <Grid>
+                    <Label Text="Потом буит.хых" FontFamily="MonseratMed" FontSize="30" HorizontalOptions="Start" VerticalOptions="Center" Padding="10,0,0,0" WidthRequest="400" HeightRequest="40" TextColor="Black"/>
+                    <Button HorizontalOptions="End" WidthRequest="2000" HeightRequest="50" TextColor="Black" BackgroundColor="#0000" FontFamily="Monserat" Clicked="Lesson1_clk"/>
+                </Grid>
+            </Frame>
+            <Frame Margin="10" BorderColor="Black"
+               Padding="5">
+                <Grid>
+                    <Label Text="Потом буит.хых" FontFamily="MonseratMed" FontSize="30" HorizontalOptions="Start" VerticalOptions="Center" Padding="10,0,0,0" WidthRequest="400" HeightRequest="40" TextColor="Black"/>
+                    <Button HorizontalOptions="End" WidthRequest="2000" HeightRequest="50" TextColor="Black" BackgroundColor="#0000" FontFamily="Monserat" Clicked="Lesson1_clk"/>
+                </Grid>
+            </Frame>
+
+        </StackLayout>
+        
+
+    </ScrollView>
+    
+
+</ContentPage>
