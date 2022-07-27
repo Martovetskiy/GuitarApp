@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MusicPlayer.TransiverPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label FontSize="90" Grid.Column="0" Grid.Row="0" HorizontalOptions="Center"
+                       Grid.RowSpan="3" Text="{Binding Source={x:Reference stepperDigit}, Path=Value }"></Label>
+                <Stepper Grid.Column="0" Grid.Row="4" HorizontalOptions="Center"
+                         x:Name="stepperDigit"
+                         Minimum="0" Maximum="9" Increment="1" Value="0"/>
+                <Button Grid.Row="5" x:Name="btnTransmit" Text="Передать" Clicked="btnTransmit_Clicked"/>
+                <Button Grid.Row="6" x:Name="btnRecive" Text="Получить" Clicked="btnRecive_Clicked"/>
+
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

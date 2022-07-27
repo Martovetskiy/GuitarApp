@@ -18,5 +18,10 @@ namespace MusicPlayer
         {
             await Navigation.PushAsync(new Lesson1());
         }
+
+        private async void Bluetooth_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SelectBlDevice());
+        }
     }
 }
