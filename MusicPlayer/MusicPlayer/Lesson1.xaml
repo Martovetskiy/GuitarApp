@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MusicPlayer.Lesson1"
-             BackgroundColor="white">
+             BackgroundColor="#F9F9FF">
     <NavigationPage.TitleView>
         <StackLayout>
             <Label FontFamily="MonseratBold" Text="Урок 1: Аккорд Am" FontSize="Subtitle" TextColor="#5a595e"/>
@@ -24,8 +24,8 @@
             <Label Grid.Column="0" Grid.Row="0" WidthRequest="250" Padding="70,0,0,0" >
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span FontFamily="MonseratBold" Text="Привет, давай попробуем сыграть аккрод " FontSize="Subtitle" ForegroundColor="Black"/>
-                        <Span FontFamily="MonseratBold" Text="Am" TextDecorations="Underline" FontSize="Subtitle"  ForegroundColor="Black" />
+                        <Span x:Name="TaskText" FontFamily="MonseratBold" Text="Привет, давай попробуем сыграть аккрод " FontSize="Subtitle" ForegroundColor="Black"/>
+                        <Span x:Name="AccordName" FontFamily="MonseratBold" Text="Am" TextDecorations="Underline" FontSize="Subtitle"  ForegroundColor="Black" />
 
                     </FormattedString>
                 </Label.FormattedText>

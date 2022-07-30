@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace MusicPlayer
 {
-    public partial class MainPage : ContentPage
+    public partial class TeacherPage : ContentPage
     {
         IOrientationHandler orientationHandler = DependencyService.Get<IOrientationHandler>();
-        public MainPage()
+        public TeacherPage()
         {   
             InitializeComponent();
-
             NavigationPage.SetHasNavigationBar(this, false);
+            
         }
-
         private double width = 0;
         private double height = 0;
 
@@ -33,17 +33,21 @@ namespace MusicPlayer
 
 
         }
-        
-       
 
-        private async void buttonStudent_Clicked(object sender, EventArgs e)
+        private async void buttonTeacherLessonCreate_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new StudentPage());
+            await DisplayAlert("Внимание", "Навык „Создать упражнение“ находится в разработке, он появится в следующих обновлениях", "Хорошо");
+
         }
 
-        private async void buttonTeacher_Clicked(object sender, EventArgs e)
+        private async void buttonTeacherBluetooth_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new TeacherPage());
+            await Navigation.PushAsync(new SelectBlDevice());
+        }
+
+        private async void ImageButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MainPage());
         }
     }
 }

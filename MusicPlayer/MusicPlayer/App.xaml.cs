@@ -10,8 +10,12 @@ namespace MusicPlayer
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new MainPage())
+            {
+                BarBackgroundColor = Color.FromHex("#F9F9FF")
+            };
         }
+
 
         protected override void OnStart()
         {

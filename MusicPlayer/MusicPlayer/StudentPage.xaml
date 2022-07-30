@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MusicPlayer.StudentPage"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms" >
+    <ContentPage.Content>
+        <Grid BackgroundColor="#F9F9FF">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <ImageButton Margin="20" Scale="2" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="#0000" HeightRequest="20" WidthRequest="20" Grid.Row="0"  Source="backRow" Clicked="Button1_Clicked"></ImageButton>
+            <forms:AnimationView
+                
+                x:Name="animationView"
+                Animation="DivanManGuitar.json"
+                AnimationSource="AssetOrBundle"
+                RepeatMode="Infinite"
+                Grid.Row="1"
+                Scale="1.5"
+                Grid.Column="1"/>
+            <Frame Padding="0,0,0,0" BackgroundColor="#0000" Grid.Row="2" Grid.RowSpan="5" Grid.ColumnSpan="3">
+
+                <StackLayout Spacing="20">
+                    <Label  FontFamily="MonseratMed" HorizontalOptions="Center" Text="Отлично!" FontSize="50" TextColor="Black"/>
+                    <Label Padding="20,0,20,0" HorizontalOptions="Center" FontSize="20" HorizontalTextAlignment="Center"  Text="Как часто ты можешь увидеть свои ошибки при выполнении упражнений? Отбивается ли у тебя желание играть на гитаре после неудачных попыток? " FontFamily="MonseratMed" TextColor="Black"/>
+                    <Label  HorizontalOptions="Center" FontSize="20" HorizontalTextAlignment="Center"  Text="Наша гитара поможет тебе не бросить играть, а добиться быстрого результата." FontFamily="MonseratMed" TextColor="Black"/>
+
+                    <Frame BackgroundColor="#0000">
+                        <StackLayout Spacing="15">
+                            <Button x:Name="buttonStudentLesson" Clicked="buttonStudentLesson_Clicked"  Text="Выполнить упражнение" TextColor="Black" FontFamily="MonseratBold" BackgroundColor="#D9D9D9" HorizontalOptions="Center" WidthRequest="280" CornerRadius="20"/>
+                            <Button x:Name="buttonStudentSong" Clicked="buttonStudentSong_Clicked" Text="Сыграть Песню (Later)" TextColor="Black" FontFamily="MonseratBold" BackgroundColor="#D9D9D9" HorizontalOptions="Center" WidthRequest="280" CornerRadius="20"/>
+                            <Button x:Name="buttonStudentBluetooth" Clicked="buttonStudentBluetooth_Clicked" Text="Подключить гитару" TextColor="Black" FontFamily="MonseratBold" BackgroundColor="#D9D9D9" HorizontalOptions="Center" WidthRequest="280" CornerRadius="20"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </Frame>
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

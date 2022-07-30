@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms" 
+             x:Class="MusicPlayer.TeacherPage">
+    <ContentPage.Content>
+        <Grid BackgroundColor="#F9F9FF">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <ImageButton Margin="20" Scale="2" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="#0000" HeightRequest="20" WidthRequest="20" Grid.Row="0"  Source="backRow" Clicked="ImageButton_Clicked"></ImageButton>
+            <forms:AnimationView
+                
+                x:Name="animationView"
+                Animation="Teacher.json"
+                AnimationSource="AssetOrBundle"
+                RepeatMode="Infinite"
+                Grid.Row="1"
+                Scale="1.5"
+                Grid.Column="1"/>
+            <Frame Padding="0,0,0,0" BackgroundColor="#0000" Grid.Row="2" Grid.RowSpan="5" Grid.ColumnSpan="3">
+
+                <StackLayout Spacing="20">
+                    <Label  FontFamily="MonseratMed" HorizontalOptions="Center" Text="Отлично!" FontSize="50" TextColor="Black"/>
+                    <Label Padding="20,0,20,0" HorizontalOptions="Center" FontSize="20" HorizontalTextAlignment="Center"  Text="Отлично! Как часто Ваши ученики занимаются дома? Много ли клиентов бросают занятия?" FontFamily="MonseratMed" TextColor="Black"/>
+                    <Label  Padding="20,0,20,0" HorizontalOptions="Center" FontSize="20" HorizontalTextAlignment="Center"  Text="Наша гитара поможет Вам планировать и контролировать занятия учеников дома, тем самым увеличить их желание учиться дальше." FontFamily="MonseratMed" TextColor="Black"/>
+
+                    <Frame BackgroundColor="#0000">
+                        <StackLayout Spacing="15">
+                            <Button x:Name="buttonTeacherLessonCreate" Clicked="buttonTeacherLessonCreate_Clicked"  Text="Создать упражнение" TextColor="Black" FontFamily="MonseratBold" BackgroundColor="#D9D9D9" HorizontalOptions="Center" WidthRequest="280" CornerRadius="20"/>
+                            <Button x:Name="buttonTeacherBluetooth" Clicked="buttonTeacherBluetooth_Clicked" Text="Подключить гитару" TextColor="Black" FontFamily="MonseratBold" BackgroundColor="#D9D9D9" HorizontalOptions="Center" WidthRequest="280" CornerRadius="20"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

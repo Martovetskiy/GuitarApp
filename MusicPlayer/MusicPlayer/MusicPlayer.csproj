@@ -19,18 +19,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ampink.png" />
     <None Remove="Fonts\Monserat.ttf" />
     <None Remove="Fonts\MonseratBold.ttf" />
     <None Remove="Fonts\MonseratMed.ttf" />
     <None Remove="Fonts\Montserrat-Medium.ttf" />
-    <None Remove="ListenRow.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="ampink.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="Fonts\Monserat.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -40,10 +35,10 @@
     <EmbeddedResource Include="Fonts\MonseratMed.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="ListenRow.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
     <PackageReference Include="Plugin.BluetoothClassic" Version="1.1.5" />
     <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.6.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
@@ -55,6 +50,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="SelectBlDevice.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="StudentPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="TeacherPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="TransiverPage.xaml">

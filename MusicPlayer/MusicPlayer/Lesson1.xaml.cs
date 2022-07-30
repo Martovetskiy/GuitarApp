@@ -15,16 +15,32 @@ namespace MusicPlayer
     {
         ISimpleAudioPlayer player;
         public int butcheck = 0;
-
+        IOrientationHandler orientationHandler = DependencyService.Get<IOrientationHandler>();
         public Lesson1()
         {
             InitializeComponent();
+            orientationHandler.ForceLandscape();
             player = CrossSimpleAudioPlayer.CreateSimpleAudioPlayer();
             player.Load("AmSongi.mp3");
             HintRow.Opacity = 0;
             InitControls();
         }
 
+        private double width = 0;
+        private double height = 0;
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            orientationHandler.ForceLandscape();
+            base.OnSizeAllocated(width, height); //must be called
+            if (this.width != width || this.height != height)
+            {
+                this.width = width;
+                this.height = height;
+            }
+
+
+        }
         void InitControls()
         {
 
@@ -36,7 +52,7 @@ namespace MusicPlayer
 
         }
 
-
+        
         private void SliderPostionValueChanged(object sender, ValueChangedEventArgs e)
         {
             if (sliderPosition.Value != player.Duration)
@@ -89,6 +105,18 @@ namespace MusicPlayer
                 return true;
             }
         }
+        private void NextLesson()
+        {
+            btnPlay.Source = "dmpink.png";
+            TaskText.Text = "Молодец, а теперь аккорд ";
+            AccordName.Text = "Dm";
+        }
+
+        bool correctnessGame()
+        {
+            return true;
+        }
+
         private async void StateHintText()
         {
             await hintText.FadeTo(0, 500);
@@ -97,10 +125,19 @@ namespace MusicPlayer
             hintText.FadeTo(1, 500);
         }
         private async void StateHintRow()
-        {
-            HintRow.FadeTo(1, 1000);
-            await Task.Delay(10000);
-            HintRow.FadeTo(0, 1000);
+        {   
+
+            await HintRow.FadeTo(1, 1000);
+            if (correctnessGame())
+            {
+                await HintRow.FadeTo(0, 1000);
+                NextLesson();
+            }
+            else
+            {
+                await DisplayAlert("Немного не так", "Попробуй сыграть еще раз, просто так же нажми на аккорд", "Хорошо, спасибо");
+            }
+            
         }
 
     }
