@@ -1,31 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+
+    <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
              x:Class="MusicPlayer.SelectBlDevice"
-             BackgroundColor="White">
+             BackgroundColor="#F9F9FF">
     <NavigationPage.TitleView>
-        <StackLayout>
-            <Label FontFamily="MonseratBold" Text="Выберите вашу гитару" FontSize="Subtitle" TextColor="#5a595e"/>
+        <StackLayout Orientation="Horizontal">
+            <Label VerticalTextAlignment="Center" FontFamily="MonseratBold" Text="Выберите свою Гитару:" FontSize="Subtitle" TextColor="#5a595e"/>
         </StackLayout>
     </NavigationPage.TitleView>
     <ContentPage.Content>
-        
-        <StackLayout>
-            <ListView x:Name="DeviceList" ItemSelected="DeviceList_ItemSelected">
+            <StackLayout>
+
+            <ListView  x:Name="lvBluetoothBoundedDevices" ItemSelected="lvBluetoothBoundedDevices_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell >
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Label VerticalOptions="Center" FontFamily="MonseratMed" Padding="20,0,0,0" FontSize="Large" TextColor="Black"  Text="{Binding Name}"/>
-                                <Rectangle BackgroundColor="#1232" ScaleY="0.95"></Rectangle>
-                            </Grid>
+                        <ViewCell>
+                            <Frame Scale="0.99" BackgroundColor="Transparent" BorderColor="Black" >
+                                <StackLayout Orientation="Horizontal" Margin="-19">
+                                    <Label VerticalOptions="Center" Padding="30,0,30,0" VerticalTextAlignment="Center" Text="{Binding Name}" FontSize="Medium" TextColor="Black" />
+                                </StackLayout>
+                            </Frame>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+        </ContentPage.Content>
+
+    </ContentPage>

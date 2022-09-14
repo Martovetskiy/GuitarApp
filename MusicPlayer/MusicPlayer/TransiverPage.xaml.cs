@@ -1,77 +1,95 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Plugin.BluetoothClassic.Abstractions;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace MusicPlayer
+﻿namespace MusicPlayer
 {
+    using MusicPlayer.ViewModel;
+    using Plugin.BluetoothClassic.Abstractions;
+    using System;
+    using Xamarin.Forms;
+    using Xamarin.Forms.Xaml;
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TransiverPage : ContentPage
     {
         public TransiverPage()
         {
             InitializeComponent();
-        }
 
-        private async void btnTransmit_Clicked(object sender, EventArgs e)
-        {
-            const int BufferSize = 1;
-            const int OffsetDefault = 0;
-            var device = (BluetoothDeviceModel)BindingContext;
-            if (device != null)
+            DigitViewModel model = (DigitViewModel)BindingContext;
+            model.PropertyChanged += Model_PropertyChanged;
+
+            if (App.CurrentBluetoothConnection != null)
             {
-                var adapter = DependencyService.Resolve<IBluetoothAdapter>();
-                using (var connection = adapter.CreateConnection(device))
-                {
-                    if (await connection.RetryConnectAsync(retriesCount: 2))
-                    {
-                        byte[] buffer = new byte[BufferSize] { (byte)stepperDigit.Value };
-                        if (!await connection.RetryTransmitAsync(buffer, OffsetDefault, buffer.Length))
-                        {
-                            await DisplayAlert("Ошибка", "Данные не отправленны", "Закрыть");
-                        }
-                    }
-                    else
-                    {
-                        await DisplayAlert("Ошибка", "Не удалось подключиться к гитаре", "Закрыть");
-                    }
-                }
+                App.CurrentBluetoothConnection.OnStateChanged += CurrentBluetoothConnection_OnStateChanged;
+                App.CurrentBluetoothConnection.OnRecived += CurrentBluetoothConnection_OnRecived;
+                App.CurrentBluetoothConnection.OnError += CurrentBluetoothConnection_OnError;
             }
         }
 
-        private async void btnRecive_Clicked(object sender, EventArgs e)
+        ~TransiverPage()
         {
-            const int BufferSize = 1;
-            const int OffsetDefault = 0;
-            var device = (BluetoothDeviceModel)BindingContext;
-            if (device != null)
+            if (App.CurrentBluetoothConnection != null)
             {
-                var adapter = DependencyService.Resolve<IBluetoothAdapter>();
-                using (var connection = adapter.CreateConnection(device))
-                {
-                    if (await connection.RetryConnectAsync(retriesCount: 2))
-                    {
-                        byte[] buffer = new byte[BufferSize];
-                        if (!(await connection.RetryReciveAsync(buffer, OffsetDefault, buffer.Length)).Succeeded)
-                        {
-                            await DisplayAlert("Ошибка", "Данные не отправленны", "Закрыть");
-                        }
-                        else
-                        {
-                            stepperDigit.Value = buffer.FirstOrDefault();
-                        }
-                    }
-                    else
-                    {
-                        await DisplayAlert("Ошибка", "Не удалось подключиться к гитаре", "Закрыть");
-                    }
-                }
+                App.CurrentBluetoothConnection.OnStateChanged -= CurrentBluetoothConnection_OnStateChanged;
+                App.CurrentBluetoothConnection.OnRecived -= CurrentBluetoothConnection_OnRecived;
+                App.CurrentBluetoothConnection.OnError -= CurrentBluetoothConnection_OnError;
             }
+        }
+
+        private void CurrentBluetoothConnection_OnStateChanged(object sender, StateChangedEventArgs stateChangedEventArgs)
+        {
+            var model = (DigitViewModel)BindingContext;
+            if (model != null)
+            {
+                model.ConnectionState = stateChangedEventArgs.ConnectionState;
+            }
+        }
+
+        private void CurrentBluetoothConnection_OnRecived(object sender, Plugin.BluetoothClassic.Abstractions.RecivedEventArgs recivedEventArgs)
+        {
+            DigitViewModel model = (DigitViewModel)BindingContext;
+
+            if (model != null)
+            {
+                model.SetReciving();
+
+                for (int index = 0; index < recivedEventArgs.Buffer.Length; index++)
+                {
+                    byte value = recivedEventArgs.Buffer.ToArray()[index];
+                    model.Digit2 = value;
+                }
+
+                model.SetRecived();
+            }
+        }
+
+        private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == DigitViewModel.Properties.Digit.ToString())
+            {
+                TransmitCurrentDigit();
+            }
+        }
+
+        private void CurrentBluetoothConnection_OnError(object sender, System.Threading.ThreadExceptionEventArgs errorEventArgs)
+        {
+            if (errorEventArgs.Exception is BluetoothDataTransferUnitException)
+            {
+                TransmitCurrentDigit();
+            }
+        }
+
+        private void TransmitCurrentDigit()
+        {
+            DigitViewModel model = (DigitViewModel)BindingContext;
+            if (model != null && !model.Reciving)
+            {
+                App.CurrentBluetoothConnection.Transmit(new Memory<byte>(new byte[] { model.Digit }));
+            }
+        }
+
+        private void GG_Clicked(object sender, EventArgs e)
+        {
+            DigitViewModel model = (DigitViewModel)BindingContext;
+            model.Digit += 1;
         }
     }
 }

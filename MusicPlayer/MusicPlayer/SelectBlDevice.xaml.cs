@@ -1,10 +1,6 @@
 ﻿using Plugin.BluetoothClassic.Abstractions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,26 +9,105 @@ namespace MusicPlayer
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SelectBlDevice : ContentPage
     {
+        private readonly IBluetoothAdapter _bluetoothAdapter;
+
         public SelectBlDevice()
         {
+            _bluetoothAdapter = DependencyService.Resolve<IBluetoothAdapter>();
             InitializeComponent();
-            FillBondedDevices();
         }
 
-        private void FillBondedDevices()
+        private void RefreshUI()
         {
-            var adapter = DependencyService.Resolve<IBluetoothAdapter>();
-            DeviceList.ItemsSource = adapter.BondedDevices;
-        }
-
-        private async void DeviceList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            var devices = (BluetoothDeviceModel)e.SelectedItem;
-            if (devices != null)
+            if (_bluetoothAdapter.Enabled)
             {
-                await Navigation.PushAsync(new TransiverPage { BindingContext = devices });
+                
+                lvBluetoothBoundedDevices.ItemsSource = _bluetoothAdapter.BondedDevices;
             }
-            DeviceList.SelectedItem = null;
+            else
+            {
+                lvBluetoothBoundedDevices.ItemsSource = null;
+            }
+        }
+
+        private void btnEnableBluetooth_Clicked(object sender, EventArgs e)
+        {
+            _bluetoothAdapter.Enable();
+            RefreshUI();
+        }
+
+        private void btnDisableBluetooth_Clicked(object sender, EventArgs e)
+        {
+            _bluetoothAdapter.Disable();
+            RefreshUI();
+        }
+
+        protected override async void OnAppearing()
+        {
+            RefreshUI();
+            await DisconnectIfConnectedAsync();
+        }
+        private async Task DisconnectIfConnectedAsync()
+        {
+            if (App.CurrentBluetoothConnection != null)
+            {
+                try
+                {
+                    App.CurrentBluetoothConnection.Dispose();
+                }
+                catch (Exception exception)
+                {
+                    await DisplayAlert("Error", exception.Message, "Close");
+                }
+            }
+        }
+
+        private async void lvBluetoothBoundedDevices_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            BluetoothDeviceModel bluetoothDeviceModel = e.SelectedItem as BluetoothDeviceModel;
+            lvBluetoothBoundedDevices.SelectedItem = null;
+
+            if (bluetoothDeviceModel != null)
+            {
+                var connected = await TryConnect(bluetoothDeviceModel);
+                if (connected)
+                {
+                    await Navigation.PushAsync(new MainPage());
+                }
+            }
+        }
+
+        private async Task<bool> TryConnect(BluetoothDeviceModel bluetoothDeviceModel)
+        {
+            const bool Connected = true;
+            const bool NotConnected = false;
+
+
+            var connection = _bluetoothAdapter.CreateManagedConnection(bluetoothDeviceModel);
+            try
+            {
+                connection.Connect();
+                App.CurrentBluetoothConnection = connection;
+
+                return Connected;
+            }
+            catch (BluetoothConnectionException exception)
+            {
+                await DisplayAlert("Connection error",
+                    $"Can not connect to the device: {bluetoothDeviceModel.Name}({bluetoothDeviceModel.Address}).\n" +
+                        $"Exception: \"{exception.Message}\"\n" +
+                        "Please, try another one.",
+                    "Close");
+
+                return NotConnected;
+            }
+            catch (Exception exception)
+            {
+                await DisplayAlert("Generic error", exception.Message, "Close");
+
+                return NotConnected;
+            }
+
         }
     }
 }

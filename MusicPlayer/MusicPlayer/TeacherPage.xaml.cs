@@ -40,10 +40,6 @@ namespace MusicPlayer
 
         }
 
-        private async void buttonTeacherBluetooth_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new SelectBlDevice());
-        }
 
         private async void ImageButton_Clicked(object sender, EventArgs e)
         {

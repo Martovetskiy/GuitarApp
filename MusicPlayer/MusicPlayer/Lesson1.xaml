@@ -2,13 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MusicPlayer.Lesson1"
+             xmlns:local="clr-namespace:MusicPlayer.ViewModel"
              BackgroundColor="#F9F9FF">
     <NavigationPage.TitleView>
         <StackLayout>
             <Label FontFamily="MonseratBold" Text="Урок 1: Аккорд Am" FontSize="Subtitle" TextColor="#5a595e"/>
         </StackLayout>
     </NavigationPage.TitleView>
+    <ContentPage.BindingContext>
+        <local:DigitViewModel Digit="0" />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
+        
 
         <Grid >
             <Grid.RowDefinitions>
@@ -25,13 +30,13 @@
                 <Label.FormattedText>
                     <FormattedString>
                         <Span x:Name="TaskText" FontFamily="MonseratBold" Text="Привет, давай попробуем сыграть аккрод " FontSize="Subtitle" ForegroundColor="Black"/>
-                        <Span x:Name="AccordName" FontFamily="MonseratBold" Text="Am" TextDecorations="Underline" FontSize="Subtitle"  ForegroundColor="Black" />
+                        <Span x:Name="AccordName" FontFamily="MonseratBold" Text="{Binding Digit2}" TextDecorations="Underline" FontSize="Subtitle"  ForegroundColor="Black" />
 
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
             <Rectangle x:Name="btnPlay1" RadiusX="40" RadiusY="40" WidthRequest="160" HeightRequest="160" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="1" Fill="#e3defb" />
-            <ImageButton x:Name="btnPlay" BackgroundColor="#00000000" Scale="0.8" HorizontalOptions="Center" VerticalOptions="Center"  Source="ampink.png" Grid.Column="1"></ImageButton>
+            <ImageButton x:Name="btnPlay" BackgroundColor="#0000" CornerRadius="10" Scale="0.8" HorizontalOptions="Center" VerticalOptions="Center"  Source="ampink.png" Grid.Column="1"></ImageButton>
             
             <StackLayout Grid.Column="2" Padding="0,0,70,0">
                 <Label FontFamily="MonseratMed" Text="Подсказка:" FontSize="Large" TextColor="Black"></Label>
@@ -43,7 +48,7 @@
                     <RowDefinition Height="60" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Image Grid.Row="1" Scale="0.8" Source="ListenRow" ></Image>
+                <Image Grid.Row="1" Scale="0.8" Rotation="90" Source="RowLesson" ></Image>
                 <Label Padding="350,0,0,0" x:Name="HintRow" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="MonseratMed" FontSize="Subtitle"  Text="- Сыграй по струнам сверху вниз" TextColor="Black" />
                 <Slider  x:Name="sliderPosition" Grid.Row="2" MaximumTrackColor="#add8f4" MinimumTrackColor="#1c60cd" ThumbColor="#0063fa">
 

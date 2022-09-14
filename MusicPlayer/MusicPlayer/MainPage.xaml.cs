@@ -16,6 +16,11 @@ namespace MusicPlayer
             InitializeComponent();
 
             NavigationPage.SetHasNavigationBar(this, false);
+            if (App.CurrentBluetoothConnection != null)
+            {
+                buttonStudent.IsEnabled = true;
+                buttonTeacher.IsEnabled = true;
+            }
         }
 
         private double width = 0;
@@ -44,6 +49,10 @@ namespace MusicPlayer
         private async void buttonTeacher_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new TeacherPage());
+        }
+        private async void buttonTeacherBluetooth_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SelectBlDevice());
         }
     }
 }

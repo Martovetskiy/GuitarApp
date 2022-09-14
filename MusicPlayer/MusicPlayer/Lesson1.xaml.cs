@@ -7,7 +7,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using MusicPlayer.ViewModel;
+using Plugin.BluetoothClassic.Abstractions;
 namespace MusicPlayer
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -19,12 +20,93 @@ namespace MusicPlayer
         public Lesson1()
         {
             InitializeComponent();
+
+            DigitViewModel model = (DigitViewModel)BindingContext;
+            model.PropertyChanged += Model_PropertyChanged;
+
+            if (App.CurrentBluetoothConnection != null)
+            {
+                App.CurrentBluetoothConnection.OnStateChanged += CurrentBluetoothConnection_OnStateChanged;
+                App.CurrentBluetoothConnection.OnRecived += CurrentBluetoothConnection_OnRecived;
+                App.CurrentBluetoothConnection.OnError += CurrentBluetoothConnection_OnError;
+            }
+
             orientationHandler.ForceLandscape();
             player = CrossSimpleAudioPlayer.CreateSimpleAudioPlayer();
             player.Load("AmSongi.mp3");
             HintRow.Opacity = 0;
             InitControls();
         }
+
+        ~Lesson1()
+        {
+            if (App.CurrentBluetoothConnection != null)
+            {
+                App.CurrentBluetoothConnection.OnStateChanged -= CurrentBluetoothConnection_OnStateChanged;
+                App.CurrentBluetoothConnection.OnRecived -= CurrentBluetoothConnection_OnRecived;
+                App.CurrentBluetoothConnection.OnError -= CurrentBluetoothConnection_OnError;
+            }
+        }
+
+        private void CurrentBluetoothConnection_OnStateChanged(object sender, StateChangedEventArgs stateChangedEventArgs)
+        {
+            var model = (DigitViewModel)BindingContext;
+            if (model != null)
+            {
+                model.ConnectionState = stateChangedEventArgs.ConnectionState;
+            }
+        }
+
+        private void CurrentBluetoothConnection_OnRecived(object sender, Plugin.BluetoothClassic.Abstractions.RecivedEventArgs recivedEventArgs)
+        {
+            DigitViewModel model = (DigitViewModel)BindingContext;
+
+            if (model != null)
+            {
+                model.SetReciving();
+
+                for (int index = 0; index < recivedEventArgs.Buffer.Length; index++)
+                {
+                    byte value = recivedEventArgs.Buffer.ToArray()[index];
+                    model.Digit2 = value;
+                }
+
+                model.SetRecived();
+            }
+        }
+
+        private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == DigitViewModel.Properties.Digit.ToString())
+            {
+                TransmitCurrentDigit();
+            }
+        }
+
+        private void CurrentBluetoothConnection_OnError(object sender, System.Threading.ThreadExceptionEventArgs errorEventArgs)
+        {
+            if (errorEventArgs.Exception is BluetoothDataTransferUnitException)
+            {
+                TransmitCurrentDigit();
+            }
+        }
+
+        private void TransmitCurrentDigit()
+        {
+            DigitViewModel model = (DigitViewModel)BindingContext;
+            if (model != null && !model.Reciving)
+            {
+                App.CurrentBluetoothConnection.Transmit(new Memory<byte>(new byte[] { model.Digit }));
+            }
+        }
+
+
+
+
+
+
+
+
 
         private double width = 0;
         private double height = 0;
@@ -52,6 +134,11 @@ namespace MusicPlayer
 
         }
 
+        void ActivateExp()
+        {
+            DigitViewModel model = (DigitViewModel)BindingContext;
+            model.Digit = 1;
+        }
         
         private void SliderPostionValueChanged(object sender, ValueChangedEventArgs e)
         {
@@ -67,6 +154,7 @@ namespace MusicPlayer
             await btnPlay.RelScaleTo(-0.1, 150);
             btnPlay1.RelScaleTo(0.1, 150);
             await btnPlay.RelScaleTo(0.1, 150);
+            ActivateExp();
             if (butcheck == 0)
             {
                 StateHintText();
@@ -114,7 +202,18 @@ namespace MusicPlayer
 
         bool correctnessGame()
         {
-            return true;
+            DigitViewModel model = (DigitViewModel)BindingContext;
+            int Flag1 = model.Digit2;
+            AccordName.Text = Flag1.ToString();
+            if (model.Digit2 == 49)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
         }
 
         private async void StateHintText()

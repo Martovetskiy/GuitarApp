@@ -28,13 +28,10 @@ namespace MusicPlayer
 
         private async void buttonStudentSong_Clicked(object sender, EventArgs e)
         {
-           await DisplayAlert("Внимание", "Навык „Cыграть песню“ находится в разработке, он появится в следующих обновлениях", "Хорошо");
+            await Navigation.PushAsync(new PaintItBlackMusicPage());
         }
 
-        private async void buttonStudentBluetooth_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new SelectBlDevice());
-        }
+        
 
         private async void Button1_Clicked(object sender, EventArgs e)
         {

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MusicPlayer.PaintItBlackMusicPage"
+             BackgroundColor="#F9F9FF">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Image Scale="0.7" Source="PaintItBlackAlbom"/>
+            <Label VerticalTextAlignment="Center" FontFamily="MonseratBold" Text="Paint it, Black - The Rolling Stones" FontSize="Subtitle" TextColor="#5a595e"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="220" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ImageButton x:Name="btnPlay" Clicked="BtnPlayClicked" BackgroundColor="#0000" Padding="0,0,0,0"  Scale="0.7" HorizontalOptions="Start" VerticalOptions="Start" Source="playButton" Grid.Row="0" Grid.Column="0"></ImageButton>
+            <Button x:Name="MusicMute" Clicked="MusicMute_Clicked" VerticalOptions="End" Grid.Column="0" ></Button>
+            <Label Grid.Column="1" Grid.Row="0" WidthRequest="250" Padding="20,0,0,0" >
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span x:Name="TaskText" FontFamily="MonseratBold" Text="Привет, давай попробуем сыграть аккрод " FontSize="Subtitle" ForegroundColor="Black"/>
+                        <Span x:Name="AccordName" FontFamily="MonseratBold" Text="Am" TextDecorations="Underline" FontSize="Subtitle"  ForegroundColor="Black" />
+
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Grid Padding="40,0,130,0"  Grid.Column="2" Grid.ColumnSpan="3">
+
+
+                <Rectangle x:Name="Recaccord1" RadiusX="40" RadiusY="40" WidthRequest="160" HeightRequest="160" HorizontalOptions="Start" VerticalOptions="Center"  Fill="#e3defb" Grid.Column="0"/>
+                <Image x:Name="Imageaccord1"  Scale="0.8" HorizontalOptions="Start" VerticalOptions="Center"  Source="ampink.png" Grid.Column="0"></Image>
+                <Rectangle x:Name="Recaccord2" RadiusX="40" RadiusY="40" WidthRequest="160" HeightRequest="160" HorizontalOptions="End" VerticalOptions="Center"  Fill="#e3defb" />
+                <Image x:Name="Imageaccord2"  Scale="0.8" HorizontalOptions="End" VerticalOptions="Center"  Source="ampink.png"></Image>
+                
+            </Grid>
+
+            <Grid Padding="55,0,55,0" Grid.ColumnSpan="5" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Image x:Name="FirstArrow" Grid.Row="1" Scale="0.8" HorizontalOptions="Start" Grid.Column="1" Rotation="90" Source="RowLesson" ></Image>
+                <Image x:Name="SecondArrow" Grid.Row="1" Scale="0.8" HorizontalOptions="Center" Grid.Column="1" Rotation="90" Source="RowLesson" ></Image>
+                <Image x:Name="ThirdArrow" Grid.Row="1" Scale="0.8" HorizontalOptions="End" Grid.Column="1" Rotation="-90" Source="RowLesson" ></Image>
+                <Label Padding="350,0,0,0" x:Name="HintRow" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="MonseratMed" FontSize="Subtitle"  Text="- Сыграй по струнам сверху вниз" TextColor="Black" />
+                <Slider  x:Name="sliderPosition" Grid.ColumnSpan="3" Grid.Row="2" MaximumTrackColor="#add8f4" MinimumTrackColor="#1c60cd" ThumbColor="#0063fa">
+
+                </Slider>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
