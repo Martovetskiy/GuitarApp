@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MusicPlayer.LoginPage"
+             BackgroundColor="#F9F9FF">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand" Spacing="40">
+
+            <Label VerticalOptions="Center" Text="Авторизация" TextColor="Black" FontFamily="MonseratMed" FontSize="40" HorizontalOptions="Center"/>
+            <Grid>
+                <BoxView BackgroundColor="#B0B0B0" ScaleX="0.97" CornerRadius="20"></BoxView>
+                <StackLayout Margin="20"  VerticalOptions="CenterAndExpand" Spacing="20" Orientation="Vertical">
+                    <Entry Placeholder="Введите Email"  x:Name="UserLoginEmail"></Entry>
+                    <Entry Placeholder="Введите пароль" IsPassword="True"  x:Name="UserLoginPassword"></Entry>
+                    <Button BackgroundColor="#D9D9D9" IsEnabled="False" CornerRadius="20" TextColor="Black" Text="Войти" Clicked="loginbutton_Clicked" x:Name="loginbutton"/>
+                    
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

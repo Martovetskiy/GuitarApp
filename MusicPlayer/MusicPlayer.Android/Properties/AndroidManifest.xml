@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" package="com.OnePLusOne.GuitarApp" android:installLocation="auto" android:versionName="0.10">
-	<uses-sdk android:minSdkVersion="26" android:targetSdkVersion="31" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" package="com.OnePLusOne.GuitarApp" android:installLocation="auto" android:versionName="0.20">
+	<uses-sdk android:minSdkVersion="24" android:targetSdkVersion="31" />
 	<application android:theme="@style/MainTheme" android:label="GuitarApp" android:icon="@drawable/logo"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-feature android:name="android.hardware.bluetooth" />

@@ -13,6 +13,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Button CornerRadius="10" BackgroundColor="#D9D9D9" HorizontalOptions="Start" Text="Выйти" VerticalOptions="Start" x:Name="LogOUTbut" Clicked="LogOUTbut_Clicked"/>
         <Image Grid.Row="1" HorizontalOptions="Center" Scale="1" Source="Logo"/>
         <Frame BackgroundColor="#0000" Grid.Row="2">
             <StackLayout>

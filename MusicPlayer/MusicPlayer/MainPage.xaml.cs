@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-
+using static MusicPlayer.LogOutPage;
 namespace MusicPlayer
 {
     public partial class MainPage : ContentPage
@@ -53,6 +53,11 @@ namespace MusicPlayer
         private async void buttonTeacherBluetooth_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new SelectBlDevice());
+        }
+
+        private async void LogOUTbut_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new LogOutPage());
         }
     }
 }

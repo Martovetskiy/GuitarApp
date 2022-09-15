@@ -1,5 +1,6 @@
 ﻿using Plugin.BluetoothClassic.Abstractions;
 using System;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,11 +12,21 @@ namespace MusicPlayer
         public App()
         {
             InitializeComponent();
-
-            MainPage = new NavigationPage(new MainPage())
+            if (!string.IsNullOrEmpty(Preferences.Get("MyFirebaseRefreshToken", "")))
             {
-                BarBackgroundColor = Color.FromHex("#F9F9FF")
-            };
+                MainPage = new NavigationPage(new MainPage())
+                {
+                    BarBackgroundColor = Color.FromHex("#F9F9FF")
+                };
+            }
+            else
+            {
+                MainPage = new NavigationPage(new SignUpPage())
+                {
+                    BarBackgroundColor = Color.FromHex("#F9F9FF")
+                };
+            }
+            
         }
 
 
