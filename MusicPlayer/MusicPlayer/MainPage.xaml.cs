@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using static MusicPlayer.LogOutPage;
 namespace MusicPlayer
 {
     public partial class MainPage : ContentPage

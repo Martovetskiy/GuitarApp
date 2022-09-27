@@ -82,7 +82,7 @@ namespace MusicPlayer
                 TransmitCurrentDigit();
             }
         }
-
+        
         private void CurrentBluetoothConnection_OnError(object sender, System.Threading.ThreadExceptionEventArgs errorEventArgs)
         {
             if (errorEventArgs.Exception is BluetoothDataTransferUnitException)
@@ -138,6 +138,11 @@ namespace MusicPlayer
         {
             DigitViewModel model = (DigitViewModel)BindingContext;
             model.Digit = 1;
+        }
+        void ErrorGame()
+        {
+            DigitViewModel model = (DigitViewModel)BindingContext;
+            model.Digit = 0;
         }
         
         private void SliderPostionValueChanged(object sender, ValueChangedEventArgs e)
@@ -199,20 +204,36 @@ namespace MusicPlayer
             TaskText.Text = "Молодец, а теперь аккорд ";
             AccordName.Text = "Dm";
         }
-
+        
         bool correctnessGame()
         {
             DigitViewModel model = (DigitViewModel)BindingContext;
-            int Flag1 = model.Digit2;
-            AccordName.Text = Flag1.ToString();
-            if (model.Digit2 == 49)
+            
+            string c1 = model.Digit2.ToString();
+            char FlagCorrectnessGame = Convert.ToChar(int.Parse(c1));
+            AccordName.Text = FlagCorrectnessGame.ToString();
+            if (FlagCorrectnessGame != null)
             {
-                return true;
+                if (model.Digit2 == 49)
+                {
+                    model.Digit = 2;
+                    return true;
+                }
+                else
+                {
+                    ErrorGame();
+                    return false;
+                }
+                
+                
             }
+
             else
             {
                 return false;
+
             }
+            
             
         }
 
@@ -227,15 +248,18 @@ namespace MusicPlayer
         {   
 
             await HintRow.FadeTo(1, 1000);
-            if (correctnessGame())
-            {
-                await HintRow.FadeTo(0, 1000);
-                NextLesson();
-            }
-            else
-            {
-                await DisplayAlert("Немного не так", "Попробуй сыграть еще раз, просто так же нажми на аккорд", "Хорошо, спасибо");
-            }
+            DigitViewModel model = (DigitViewModel)BindingContext;
+                if (model.Digit2 == 49)
+                {
+                    await HintRow.FadeTo(0, 1000);
+                    NextLesson();
+                }
+            
+                if (model.Digit2 == 50)
+                {
+                    ErrorGame();
+                    await DisplayAlert("Немного не так", "Попробуй сыграть еще раз, просто так же нажми на аккорд", "Хорошо, спасибо");
+                }
             
         }
 

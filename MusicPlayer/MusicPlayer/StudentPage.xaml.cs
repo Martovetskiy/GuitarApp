@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,11 +14,14 @@ namespace MusicPlayer
         public StudentPage()
         {
             InitializeComponent();
+           
             NavigationPage.SetHasNavigationBar(this, false);
         }
+
+
+        
+
        
-
-
         private async void buttonStudentLesson_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Lesson1());

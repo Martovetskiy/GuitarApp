@@ -46,9 +46,18 @@
                     Maximum="200" Minimum="0" Increment="1"
                     Value="{Binding Digit}" />
                 </Grid>
-                <Button x:Name="GG" Clicked="GG_Clicked"></Button>
-                <Label Grid.Column="0" Grid.Row="0" VerticalOptions="Start" FontSize="Large" 
-                       Text="{Binding Digit2, StringFormat='Current value is: {0:F0}'}"/>
+                <Grid>
+                    <Button Grid.Column="0" x:Name="GG" Text="Режим 1" Clicked="GG_Clicked"></Button>
+                    <Button Grid.Column="1" Grid.Row="0" x:Name="GG1" Text="Режим 2" Clicked="GG1_Clicked"></Button>
+                    <Button Grid.Column="2" Grid.Row="0" x:Name="GG2" Text="Режим 3" Clicked="GG2_Clicked"></Button>
+                    <Button Grid.Column="0" Grid.Row="1" x:Name="GG3" Text="Режим 4" Clicked="GG3_Clicked"></Button>
+                    <Button Grid.Column="1" Grid.Row="1" x:Name="GG4" Text="Режим 5" Clicked="GG4_Clicked"></Button>
+                    <Button Grid.Column="2" Grid.Row="1" x:Name="GG5" Text="Режим 6" Clicked="GG5_Clicked"></Button>
+                    <Button Grid.Column="0" Grid.Row="2" x:Name="GG6" Text="Режим 7" Clicked="GG6_Clicked"></Button>
+                    <Button Grid.Column="1" Grid.Row="2" x:Name="GG7" Text="Режим 8" Clicked="GG7_Clicked"></Button>
+                    <Button Grid.Column="2" Grid.Row="2" x:Name="GG8" Text="Остновить" Clicked="GG8_Clicked"></Button>
+
+                </Grid>
             </StackLayout>
             <StackLayout 
             VerticalOptions="End" 
