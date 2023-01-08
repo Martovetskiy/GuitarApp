@@ -25,7 +25,7 @@
         <Frame Grid.Row="4" Grid.RowSpan="2" BackgroundColor="#0000">
             <StackLayout Spacing="15">
                 <Button x:Name="buttonStudent" IsEnabled="False" Clicked="buttonStudent_Clicked" Text="Я - Ученик" TextColor="Black" FontFamily="MonseratMed" BackgroundColor="#D9D9D9" HorizontalOptions="Center" WidthRequest="280" CornerRadius="20"/>
-                <Button x:Name="buttonTeacher" IsEnabled="False" Clicked="buttonTeacher_Clicked" Text="Я - Учитель" TextColor="Black" FontFamily="MonseratMed" BackgroundColor="#D9D9D9" HorizontalOptions="Center" WidthRequest="280" CornerRadius="20"/>
+                <Button  x:Name="buttonTeacher" IsEnabled="False" Clicked="buttonTeacher_Clicked" Text="Я - Учитель" TextColor="Black" FontFamily="MonseratMed" BackgroundColor="#D9D9D9" HorizontalOptions="Center" WidthRequest="280" CornerRadius="20"/>
                 <Button x:Name="buttonTeacherBluetooth"  Clicked="buttonTeacherBluetooth_Clicked" Text="Подключить гитару" TextColor="Black" FontFamily="MonseratMed" BackgroundColor="#D9D9D9" HorizontalOptions="Center" WidthRequest="280" CornerRadius="20"/>
             </StackLayout>
         </Frame>

@@ -139,9 +139,12 @@ namespace MusicPlayer
             DigitViewModel model = (DigitViewModel)BindingContext;
             model.Digit = 1;
         }
-        void ErrorGame()
+        public int kil = 0;
+        public async void ErrorGame()
         {
             DigitViewModel model = (DigitViewModel)BindingContext;
+            
+            
             model.Digit = 0;
         }
         
@@ -155,6 +158,8 @@ namespace MusicPlayer
 
         private async void BtnPlayClicked(object sender, EventArgs e)
         {
+            DigitViewModel model = (DigitViewModel)BindingContext;
+
             btnPlay1.RelScaleTo(-0.1, 150);
             await btnPlay.RelScaleTo(-0.1, 150);
             btnPlay1.RelScaleTo(0.1, 150);
@@ -165,7 +170,12 @@ namespace MusicPlayer
                 StateHintText();
                 butcheck += 1;
             }
-            
+            if (kil >=1)
+            {
+                hintText.Text = "Попробуй зажать сильнее)";
+            }
+            kil = 0;
+            model.Digit2 = 0;
             player.Play();
 
             sliderPosition.Maximum = player.Duration;
@@ -173,6 +183,7 @@ namespace MusicPlayer
 
             Device.StartTimer(TimeSpan.FromSeconds(0.1), UpdatePosition);
             Device.StartTimer(TimeSpan.FromSeconds(0.1), CheckStateHintRow);
+            Device.StartTimer(TimeSpan.FromSeconds(0.1), correctnessGame);
 
 
         }
@@ -191,6 +202,7 @@ namespace MusicPlayer
             if (sliderPosition.Value >= (sliderPosition.Maximum - 0.1))
             {
                 StateHintRow();
+                
                 return false;
             }
             else
@@ -198,11 +210,12 @@ namespace MusicPlayer
                 return true;
             }
         }
-        private void NextLesson()
+        private async void NextLesson()
         {
-            btnPlay.Source = "dmpink.png";
-            TaskText.Text = "Молодец, а теперь аккорд ";
-            AccordName.Text = "Dm";
+            TaskText.Text = "Молодец ";
+            hintText.Text = "Молодец ";
+            await DisplayAlert("Молодец!", "Ты выполнил своё первое упражнение!", "Хорошо");
+            await Navigation.PopAsync();
         }
         
         bool correctnessGame()
@@ -211,18 +224,23 @@ namespace MusicPlayer
             
             string c1 = model.Digit2.ToString();
             char FlagCorrectnessGame = Convert.ToChar(int.Parse(c1));
-            AccordName.Text = FlagCorrectnessGame.ToString();
             if (FlagCorrectnessGame != null)
             {
                 if (model.Digit2 == 49)
                 {
-                    model.Digit = 2;
-                    return true;
+                    NextLesson();
+                    return false;
                 }
                 else
                 {
+                    kil += 1;
+                    if ((model.Digit2 == 48))
+                    {
+                        hintText.Text = "Задание выполнено неверно, попробуй еще раз. Для продолжения нажми на аккорд)";
+                    }
                     ErrorGame();
-                    return false;
+
+                    return true;
                 }
                 
                 
@@ -251,15 +269,10 @@ namespace MusicPlayer
             DigitViewModel model = (DigitViewModel)BindingContext;
                 if (model.Digit2 == 49)
                 {
-                    await HintRow.FadeTo(0, 1000);
-                    NextLesson();
+                await HintRow.FadeTo(0, 1000);
                 }
             
-                if (model.Digit2 == 50)
-                {
-                    ErrorGame();
-                    await DisplayAlert("Немного не так", "Попробуй сыграть еще раз, просто так же нажми на аккорд", "Хорошо, спасибо");
-                }
+                
             
         }
 

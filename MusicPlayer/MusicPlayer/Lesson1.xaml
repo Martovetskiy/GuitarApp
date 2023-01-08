@@ -30,7 +30,7 @@
                 <Label.FormattedText>
                     <FormattedString>
                         <Span x:Name="TaskText" FontFamily="MonseratBold" Text="Привет, давай попробуем сыграть аккрод " FontSize="Subtitle" ForegroundColor="Black"/>
-                        <Span x:Name="AccordName" FontFamily="MonseratBold" Text="{Binding Digit2}" TextDecorations="Underline" FontSize="Subtitle"  ForegroundColor="Black" />
+                        <Span x:Name="AccordName" FontFamily="MonseratBold" Text="Am" TextDecorations="Underline" FontSize="Subtitle"  ForegroundColor="Black" />
 
                     </FormattedString>
                 </Label.FormattedText>

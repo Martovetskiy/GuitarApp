@@ -18,7 +18,7 @@ namespace MusicPlayer
             if (App.CurrentBluetoothConnection != null)
             {
                 buttonStudent.IsEnabled = true;
-                buttonTeacher.IsEnabled = true;
+                //buttonTeacher.IsEnabled = true;
             }
         }
 

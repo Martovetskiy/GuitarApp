@@ -39,7 +39,7 @@
                     <Frame BackgroundColor="#0000">
                         <StackLayout Spacing="15">
                             <Button x:Name="buttonStudentLesson" Clicked="buttonStudentLesson_Clicked"  Text="Выполнить упражнение" TextColor="Black" FontFamily="MonseratBold" BackgroundColor="#D9D9D9" HorizontalOptions="Center" WidthRequest="280" CornerRadius="20"/>
-                            <Button x:Name="buttonStudentSong" Clicked="buttonStudentSong_Clicked" Text="Сыграть Песню (Later)" TextColor="Black" FontFamily="MonseratBold" BackgroundColor="#D9D9D9" HorizontalOptions="Center" WidthRequest="280" CornerRadius="20"/>
+                            <Button IsEnabled="False" x:Name="buttonStudentSong" Clicked="buttonStudentSong_Clicked" Text="Сыграть Песню (Later)" TextColor="Black" FontFamily="MonseratBold" BackgroundColor="#D9D9D9" HorizontalOptions="Center" WidthRequest="280" CornerRadius="20"/>
                         </StackLayout>
                     </Frame>
                 </StackLayout>

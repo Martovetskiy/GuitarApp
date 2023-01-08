@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="MusicPlayer.TransiverPage"
              xmlns:local="clr-namespace:MusicPlayer.ViewModel"
-             Title="Digit">
+             Title="Админ Панель">
     <ContentPage.BindingContext>
         <local:DigitViewModel Digit="0" />
     </ContentPage.BindingContext>
